@@ -66,14 +66,13 @@ def add_noun(phrase):
 def delete_noun(phrase):
   # phrase = phrase.replace('+', ' ')
   noun = Noun.query.filter_by(phrase=phrase).first()
-  print(noun.id)
-  return 'id # is {}'.format(noun.id)
-  # try:
-  #   db.session.add(new_noun)
-  #   db.session.commit()
-  #   return 'OK'
-  # except:
-  #   return 'Error when writing to database', 500
+  print('id # is {}'.format(noun.id))
+  try:
+    db.session.delete(noun)
+    db.session.commit()
+    return 'OK'
+  except:
+    return 'Error when writing to database', 500
 
 @app.route('/adjective/<phrase>', methods=['POST'])
 def add_adjective(phrase):
@@ -81,6 +80,18 @@ def add_adjective(phrase):
   new_adjective = Adjective(phrase)
   try:
     db.session.add(new_adjective)
+    db.session.commit()
+    return 'OK'
+  except:
+    return 'Error when writing to database', 500
+
+@app.route('/adjective/<phrase>', methods=['DELETE'])
+def delete_adjective(phrase):
+  phrase = phrase.replace('+', ' ')
+  adjective = Adjective.query.filter_by(phrase=phrase).first()
+  print('id # is {}'.format(adjective.id))
+  try:
+    db.session.delete(adjective)
     db.session.commit()
     return 'OK'
   except:
