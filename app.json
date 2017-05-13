@@ -1,0 +1,13 @@
+{
+  "name": "Shill-isms",
+  "description": "Quote generator inspired my coworker, who shall rename anonymous. This app generates NSFW language.",
+  "keywords": [
+    "flask",
+    "python",
+    "sample"
+  ],
+  "repository": "https://github.com/alexdglover/shill-isms",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}

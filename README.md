@@ -1,2 +1,7 @@
-# shill-isms
-Quote generator inspired my coworker, who shall rename anonymous. This app generates NSFW language.
+# Shill-isms
+
+## License
+Licensed under the MIT License
+
+## Credits
+Thanks to yefim for https://github.com/yefim/flask-heroku-sample
