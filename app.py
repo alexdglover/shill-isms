@@ -47,22 +47,22 @@ def index():
 @app.route('/noun/<phrase>', methods=['POST'])
 def add_noun(phrase):
   new_noun = Noun(phrase)
-  try:
-    db.session.add(new_noun)
-    db.session.commit()
-    return 'OK'
-  except:
-    return 'Error when writing to database', 500
+  # try:
+  db.session.add(new_noun)
+  db.session.commit()
+  return 'OK'
+  # except:
+  #   return 'Error when writing to database', 500
 
 @app.route('/adjective/<phrase>', methods=['POST'])
 def add_adjective(phrase):
   new_adjective = Adjective(phrase)
-  try:
-    db.session.add(new_adjective)
-    db.session.commit()
-    return 'OK'
-  except:
-    return 'Error when writing to database', 500
+  # try:
+  db.session.add(new_adjective)
+  db.session.commit()
+  return 'OK'
+  # except:
+  #   return 'Error when writing to database', 500
 
 if __name__ == '__main__':
   db.create_all()
