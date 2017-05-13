@@ -11,29 +11,41 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
 
 
-class User(db.Model):
+class Noun(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(100))
-  email = db.Column(db.String(100))
+  phrase = db.Column(db.String(255))
 
-  def __init__(self, name, email):
-    self.name = name
-    self.email = email
+  def __init__(self, phrase):
+    self.phrase = phrase
+
+class Adjective(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  phrase = db.Column(db.String(255))
+
+  def __init__(self, phrase):
+    self.phrase = phrase
 
 
 @app.route('/', methods=['GET'])
 def index():
-  return render_template('index.html', users=User.query.all())
+  return 200
 
+@app.route('/noun', methods=['POST'])
+def add_noun():
+  new_noun = Noun(phrase)
+  try:
+    db.session.add(new_noun)
+    db.session.commit()
+    return 200
+  except:
+    return 500
 
-@app.route('/user', methods=['POST'])
-def user():
-  u = User(request.form['name'], request.form['email'])
-  db.session.add(u)
-  db.session.commit()
-  return redirect(url_for('index'))
-
-if __name__ == '__main__':
-  db.create_all()
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host='0.0.0.0', port=port, debug=True)
+@app.route('/adjective/', methods=['POST'])
+def add_adjective():
+  new_adjective = Adjective(phrase)
+  try:
+    db.session.add(new_adjective)
+    db.session.commit()
+    return 200
+  except:
+    return 500
