@@ -53,7 +53,7 @@ def index():
 
 @app.route('/noun')
 def get_nouns():
-  return Noun.query.all().join(',')
+  return ', '.join(Noun.query.all())
 
 @app.route('/noun/<phrase>', methods=['POST'])
 def add_noun(phrase):
@@ -82,7 +82,7 @@ def delete_noun(phrase):
 
 @app.route('/adjective')
 def get_adjectives():
-  return Adjective.query.all().join(',')
+  return ', '.join(Adjective.query.all())
 
 @app.route('/adjective/<phrase>', methods=['POST'])
 def add_adjective(phrase):
