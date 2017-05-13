@@ -51,6 +51,10 @@ def index():
   ).limit(1).all()[0]
   return '{} {}'.format(adjective, noun)
 
+@app.route('/noun')
+def get_nouns():
+  return Noun.query.all()
+
 @app.route('/noun/<phrase>', methods=['POST'])
 def add_noun(phrase):
   phrase = phrase.replace('+', ' ')
@@ -75,6 +79,10 @@ def delete_noun(phrase):
     return 'OK'
   except:
     return 'Error when writing to database', 500
+
+@app.route('/adjective')
+def get_adjectives():
+  return Adjective.query.all()
 
 @app.route('/adjective/<phrase>', methods=['POST'])
 def add_adjective(phrase):
