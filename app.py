@@ -53,7 +53,9 @@ def index():
 
 @app.route('/noun')
 def get_nouns():
-  return ', '.join(Noun.query.all())
+  nouns = Noun.query.all()
+  nouns = [noun.phrase for noun in nouns]
+  return ', '.join(nouns)
 
 @app.route('/noun/<phrase>', methods=['POST'])
 def add_noun(phrase):
