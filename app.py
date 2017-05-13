@@ -28,7 +28,7 @@ class Adjective(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  return 200
+  return 'Hello world'
 
 @app.route('/noun', methods=['POST'])
 def add_noun():
@@ -49,3 +49,8 @@ def add_adjective():
     return 200
   except:
     return 500
+
+if __name__ == '__main__':
+  db.create_all()
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port, debug=True)
