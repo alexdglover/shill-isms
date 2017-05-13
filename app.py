@@ -84,7 +84,9 @@ def delete_noun(phrase):
 
 @app.route('/adjective')
 def get_adjectives():
-  return ', '.join(Adjective.query.all())
+  adjectives = Adjective.query.all()
+  adjectives = [adjective.phrase for adjective in adjectives]
+  return ', '.join(adjectives)
 
 @app.route('/adjective/<phrase>', methods=['POST'])
 def add_adjective(phrase):
