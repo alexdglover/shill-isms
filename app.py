@@ -34,17 +34,15 @@ db.create_all()
 def index():
   # Get random phrase from each table
   adjective = Adjective.query.options(load_only('id')).offset(
-            func.floor(
-                func.random() *
-                db.session.query(func.count(model_name.id))
-            )
-        ).limit(1).all()
+    func.floor(
+      func.random() * db.session.query(func.count(Adjective.id))
+    )
+  ).limit(1).all()
   noun = Noun.query.options(load_only('id')).offset(
-            func.floor(
-                func.random() *
-                db.session.query(func.count(model_name.id))
-            )
-        ).limit(1).all()
+    func.floor(
+      func.random() * db.session.query(func.count(Noun.id))
+    )
+  ).limit(1).all()
   return '{} {}'.fmt(adjective, noun)
 
 @app.route('/noun/<phrase>', methods=['POST'])
