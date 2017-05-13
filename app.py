@@ -43,15 +43,13 @@ def index():
     func.floor(
       func.random() * db.session.query(func.count(Adjective.id))
     )
-  ).limit(1).all()
+  ).limit(1).all()[0]
   noun = Noun.query.options(load_only('id')).offset(
     func.floor(
       func.random() * db.session.query(func.count(Noun.id))
     )
-  ).limit(1).all()
-  print(type(adjective))
-  print(type(noun))
-  return '{} {}'.format(str(adjective), str(noun))
+  ).limit(1).all()[0]
+  return '{} {}'.format(adjective, noun)
 
 @app.route('/noun/<phrase>', methods=['POST'])
 def add_noun(phrase):
