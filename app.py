@@ -66,6 +66,8 @@ def add_noun(phrase):
 def delete_noun(phrase):
   phrase = phrase.replace('+', ' ')
   noun = Noun.query.filter_by(phrase=phrase).first()
+  if not noun:
+    return 'Noun not found', 404
   print('id # is {}'.format(noun.id))
   try:
     db.session.delete(noun)
@@ -89,6 +91,8 @@ def add_adjective(phrase):
 def delete_adjective(phrase):
   phrase = phrase.replace('+', ' ')
   adjective = Adjective.query.filter_by(phrase=phrase).first()
+  if not adjective:
+    return 'Adjective not found', 404
   print('id # is {}'.format(adjective.id))
   try:
     db.session.delete(adjective)
