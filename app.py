@@ -1,7 +1,8 @@
 import os
-
+import random
 from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
+from  sqlalchemy.sql.expression import func, select
 
 app = Flask(__name__)
 
@@ -28,27 +29,40 @@ class Adjective(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  return 'Hello world'
+  # Get random phrase from each table
+  adjective = Adjective.query.options(load_only('id')).offset(
+            func.floor(
+                func.random() *
+                db.session.query(func.count(model_name.id))
+            )
+        ).limit(1).all()
+  noun = Noun.query.options(load_only('id')).offset(
+            func.floor(
+                func.random() *
+                db.session.query(func.count(model_name.id))
+            )
+        ).limit(1).all()
+  return '{} {}'.fmt(adjective, noun)
 
-@app.route('/noun', methods=['POST'])
-def add_noun():
+@app.route('/noun/<phrase>', methods=['POST'])
+def add_noun(phrase):
   new_noun = Noun(phrase)
   try:
     db.session.add(new_noun)
     db.session.commit()
-    return 200
+    return 'OK'
   except:
-    return 500
+    return 'Error when writing to database', 500
 
-@app.route('/adjective/', methods=['POST'])
-def add_adjective():
+@app.route('/adjective/<phrase>', methods=['POST'])
+def add_adjective(phrase):
   new_adjective = Adjective(phrase)
   try:
     db.session.add(new_adjective)
     db.session.commit()
-    return 200
+    return 'OK'
   except:
-    return 500
+    return 'Error when writing to database', 500
 
 if __name__ == '__main__':
   db.create_all()
