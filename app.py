@@ -67,7 +67,7 @@ def delete_noun(phrase):
   # phrase = phrase.replace('+', ' ')
   noun = Noun.query.filter_by(phrase=phrase).first()
   print(noun.id)
-  return noun.id
+  return 'id # is {}'.format(noun.id)
   # try:
   #   db.session.add(new_noun)
   #   db.session.commit()
