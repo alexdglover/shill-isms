@@ -63,7 +63,7 @@ def add_noun(phrase):
     return 'Error when writing to database', 500
 
 @app.route('/noun/<phrase>', methods=['DELETE'])
-def add_noun(phrase):
+def delete_noun(phrase):
   # phrase = phrase.replace('+', ' ')
   noun = Noun.query.filter_by(phrase=phrase).first()
   print(noun.id)
