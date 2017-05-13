@@ -20,12 +20,18 @@ class Noun(db.Model):
   def __init__(self, phrase):
     self.phrase = phrase
 
+  def __repr__(self):
+    return self.phrase
+
 class Adjective(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   phrase = db.Column(db.String(255))
 
   def __init__(self, phrase):
     self.phrase = phrase
+
+  def __repr__(self):
+    return self.phrase
 
 # Initialize tables
 db.create_all()
