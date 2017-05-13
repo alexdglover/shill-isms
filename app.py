@@ -26,6 +26,8 @@ class Adjective(db.Model):
   def __init__(self, phrase):
     self.phrase = phrase
 
+# Initialize tables
+db.create_all()
 
 @app.route('/', methods=['GET'])
 def index():
