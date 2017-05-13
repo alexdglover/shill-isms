@@ -64,7 +64,7 @@ def add_noun(phrase):
 
 @app.route('/noun/<phrase>', methods=['DELETE'])
 def delete_noun(phrase):
-  # phrase = phrase.replace('+', ' ')
+  phrase = phrase.replace('+', ' ')
   noun = Noun.query.filter_by(phrase=phrase).first()
   print('id # is {}'.format(noun.id))
   try:
