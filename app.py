@@ -2,7 +2,8 @@ import os
 import random
 from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
-from  sqlalchemy.sql.expression import func, select
+from sqlalchemy.sql.expression import func
+from sqlalchemy.orm import load_only
 
 app = Flask(__name__)
 
