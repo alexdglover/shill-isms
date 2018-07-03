@@ -113,6 +113,10 @@ def delete_adjective(phrase):
   except:
     return 'Error when writing to database', 500
 
+@app.route('/feedback/<word>')
+def get_feedback(word):
+  return 'What I really like about {} is that it’s practically indecipherable and takes weeks or months of solid usage to really understand what’s going on. At least when changing more than a simple parameter. And as a result of not being able to really use it I’ve been forced to ‘outsource’ all of the {} infrastructure work I’d have historically handled myself to the Cloud team'.format(word, word)
+
 if __name__ == '__main__':
   db.create_all()
   port = int(os.environ.get('PORT', 5000))
